@@ -3,18 +3,61 @@ var Store = {
     website: 'Bencomicsonline.com',
     telephone: "123-456-7890",
     email: "benjamin.e.castillo1@gmail.com",
-    comicsCount: 0,
-    dcComics: 0,
-    indieComics: 0,
-    titanComics: 0,
-    marvelComics: 0,
-    idwComics: 0,
-    comics: [],
 
         addInventory: function(comic){
             this.comics.push(comic);
         }
 }
+
+var Cart = {
+  name: "Your Cart",
+  comicsCount: 0,
+  dcComics: 0,
+  marvelComics: 0,
+  idwComics: 0,
+  comics: [],
+
+  addComics(comic){
+    this.comics.push(comic);
+  
+  console.log("following comic has been added to your Cart" + comic.title);
+  
+  this.increseComicsCount(comic);
+  },
+  deleteComics(comic){
+    this.comics.splice(comic);
+  
+  console.log("following comic has been deleted from your Cart" + comic.title);
+  
+  this.decreaseComicCount(comic);
+}
+}
+increaseComicCount(comic);
+  this.comicsCount +=1;
+  if(comic.publishe=="DC"){
+    this.dcComics +=1;
+  }
+  if(comic.publishe=="Marvel"){
+    this.marvelComics +=1;
+  }
+  if(comic.publishe=="IDW"){
+    this.idwComics +=1;
+  }
+  decreaseComicCount(comic);
+  this.comicsCount -=1;
+  if(comic.publishe=="DC"){
+    this.dcComics -=1;
+  }
+  if(comic.publishe=="Marvel"){
+    this.marvelComics -=1;
+  }
+  if(comic.publishe=="IDW"){
+    this.idwComics -=1;
+  }
+
+  alert("You currently have" + this.comicsCount + "comics in your cart");
+  console.log("You currently have" + this.comicsCount + "comics in your cart");
+  
 class Comic{
     constructor(title, publisher, issue, price){
         this.title = title;
@@ -24,22 +67,3 @@ class Comic{
 
 }
 }
-class Cart {
-    constructor() {
-      this.comics = [];
-    }
-    addComics(amount, comic) {
-      this.comics.push(...Array(amount).fill(comic));
-    }
-    removeComics(amount, comic){
-        this.comics.splice(...Array(amount).fill(this.comics));
-    }
-    calcTotal() {
-      return this.products
-        .map(comic => comic.price)
-        .reduce((a, b) => a + b, 0);
-    }
-    printShoppingInfo() {
-      alert('one has to pay in total: ' + this.calcTotal());
-    }
-  }
